@@ -1,2 +1,2 @@
 # ShopOnline
-My first application using swing
+My first application using spring boot
