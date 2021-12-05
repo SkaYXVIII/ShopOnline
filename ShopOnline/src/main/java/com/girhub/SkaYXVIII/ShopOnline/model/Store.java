@@ -17,6 +17,10 @@ public class Store {
 
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "store_group_id")
+    private StoreGroup group;
+
     public Store() {
     }
 
@@ -27,8 +31,17 @@ public class Store {
         this.description = description;
     }
 
+    public Store(int id, String name, float price, String description, StoreGroup group) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        if (group != null){
+            this.group = group;
+        }
+    }
+
     public void updateFrom(final Store source){
-        this.id = source.id;
         this.name = source.name;
         this.price = source.price;
         this.description = source.description;
@@ -63,11 +76,15 @@ public class Store {
         this.description = description;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public StoreGroup getGroup() {
+        return group;
+    }
+
+    public void setGroup(StoreGroup group) {
+        this.group = group;
     }
 }

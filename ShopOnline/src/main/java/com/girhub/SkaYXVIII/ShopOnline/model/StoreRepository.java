@@ -29,5 +29,4 @@ public interface StoreRepository extends JpaRepository<Store,Integer> {
 
     @Override
     Store save(Store entity);
-
 }
