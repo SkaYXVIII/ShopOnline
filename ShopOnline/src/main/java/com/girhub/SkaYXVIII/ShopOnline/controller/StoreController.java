@@ -43,12 +43,7 @@ public class StoreController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-//    @GetMapping("/{name}")
-//    ResponseEntity<List<Store>> readStoreByName(@PathVariable String name) {
-//        List<Store> items = repository.findByName(name);
-//        if (items.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        return new ResponseEntity<>(items,HttpStatus.OK);
-//    }
+
 
     @PutMapping("/{id}")
     ResponseEntity<?> updateStore(@PathVariable int id, @RequestBody @Valid Store toUpdate) {
