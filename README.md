@@ -1,7 +1,7 @@
 # ShopOnline
 My first application using spring boot. It's simple app for training purpose.
-So far I only implemented beckend logic of app,that relies on showing items from database,
-updating their specification, deleting them,adding them to database and also connecting them in grups.
+So far I only implemented backend logic of app,that relies on showing items from database,
+updating their specification, deleting them, adding them to database and also connecting them in groups.
 I read endpoints through Postman app. My entire website is created on http://localhost:8080.
 
 List of Endpoints:
