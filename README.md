@@ -17,7 +17,7 @@ List of Endpoints:
 [DELETE]
 /items/{id}
 
-Wygląd odczytanie endpointów typu GET:
+Examples of reading some endpoints type GET:
 
 ![image](https://user-images.githubusercontent.com/72752940/148656524-c8fe77d8-c29f-4920-8f6e-52f5d35a1ea7.png)
 
