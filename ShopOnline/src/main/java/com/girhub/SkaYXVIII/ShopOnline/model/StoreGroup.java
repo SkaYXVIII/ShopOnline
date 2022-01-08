@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Entity
-@Table(name = "store_group")
+@Table(name = "store_groups")
 public class StoreGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -10,6 +10,5 @@ import java.util.List;
 @Repository
 public interface StoreGroupRepository extends JpaRepository<StoreGroup,Integer>{
     @Override
-    @Query("select distinct g from StoreGroup g join fetch g.items")
     List<StoreGroup> findAll();
 }

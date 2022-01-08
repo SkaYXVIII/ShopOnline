@@ -21,6 +21,7 @@ public class Store {
     @JoinColumn(name = "store_group_id")
     private StoreGroup group;
 
+
     public Store() {
     }
 
@@ -39,12 +40,14 @@ public class Store {
         if (group != null){
             this.group = group;
         }
+
     }
 
     public void updateFrom(final Store source){
         this.name = source.name;
         this.price = source.price;
         this.description = source.description;
+        this.group = source.group;
     }
 
 

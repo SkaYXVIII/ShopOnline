@@ -1,19 +1,21 @@
 package com.girhub.SkaYXVIII.ShopOnline.model.projection;
 
-import com.girhub.SkaYXVIII.ShopOnline.model.Store;
 import com.girhub.SkaYXVIII.ShopOnline.model.StoreGroup;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class GroupReadModel {
     private int id;
     private String description;
-    private Set<Store> items;
+    private Set<GroupItemReadModel> items;
 
     public GroupReadModel(StoreGroup source) {
         id = source.getId();
         description = source.getDescription();
-        items = source.getItems();
+        items = source.getItems().stream()
+                .map(GroupItemReadModel::new)
+                .collect(Collectors.toSet());
     }
 
     public int getId() {
@@ -32,11 +34,11 @@ public class GroupReadModel {
         this.description = description;
     }
 
-    public Set<Store> getItems() {
+    public Set<GroupItemReadModel> getItems() {
         return items;
     }
 
-    public void setItems(Set<Store> items) {
+    public void setItems(Set<GroupItemReadModel> items) {
         this.items = items;
     }
 }

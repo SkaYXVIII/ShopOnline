@@ -1,7 +1,9 @@
 package com.girhub.SkaYXVIII.ShopOnline.controller;
 
+import com.girhub.SkaYXVIII.ShopOnline.logic.ItemService;
 import com.girhub.SkaYXVIII.ShopOnline.model.Store;
 import com.girhub.SkaYXVIII.ShopOnline.model.StoreRepository;
+import com.girhub.SkaYXVIII.ShopOnline.model.projection.ItemReadModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,10 +20,12 @@ import java.util.List;
 public class StoreController {
     private static final Logger logger = LoggerFactory.getLogger(StoreController.class);
     private final StoreRepository repository;
+    private final ItemService service;
 
 
-    public StoreController(StoreRepository repository) {
+    public StoreController(StoreRepository repository, ItemService service) {
         this.repository = repository;
+        this.service = service;
     }
 
     @PostMapping
@@ -31,9 +35,14 @@ public class StoreController {
     }
 
     @GetMapping
-    ResponseEntity<List<Store>> showStore() {
+    ResponseEntity<List<ItemReadModel>> showStore() {
         logger.warn("Exposing all the tasks!");
-        return ResponseEntity.ok(repository.findAll());
+        System.out.println(service.readAll().toString());
+        if (service.readAll() == null){
+            System.out.println("tutaj");
+        }
+
+        return ResponseEntity.ok(service.readAll());
     }
 
     @GetMapping("/{id}")
