@@ -6,16 +6,16 @@ import java.util.Set;
 
 @Entity
 @Table(name = "store_groups")
-public class StoreGroup {
+public class ItemsGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotBlank(message = "Task group's description must not be empty")
     private String description;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
-    private Set<Store> items;
+    private Set<Item> items;
 
-    public StoreGroup() {
+    public ItemsGroup() {
     }
 
     public int getId() {
@@ -34,11 +34,11 @@ public class StoreGroup {
         this.description = description;
     }
 
-    public Set<Store> getItems() {
+    public Set<Item> getItems() {
         return items;
     }
 
-    public void setItems(Set<Store> items) {
+    public void setItems(Set<Item> items) {
         this.items = items;
     }
 }

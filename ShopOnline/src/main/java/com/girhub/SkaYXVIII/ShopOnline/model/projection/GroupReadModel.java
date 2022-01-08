@@ -1,6 +1,6 @@
 package com.girhub.SkaYXVIII.ShopOnline.model.projection;
 
-import com.girhub.SkaYXVIII.ShopOnline.model.StoreGroup;
+import com.girhub.SkaYXVIII.ShopOnline.model.ItemsGroup;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -10,7 +10,7 @@ public class GroupReadModel {
     private String description;
     private Set<GroupItemReadModel> items;
 
-    public GroupReadModel(StoreGroup source) {
+    public GroupReadModel(ItemsGroup source) {
         id = source.getId();
         description = source.getDescription();
         items = source.getItems().stream()

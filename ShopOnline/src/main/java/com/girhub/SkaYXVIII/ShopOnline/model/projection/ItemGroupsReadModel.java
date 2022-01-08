@@ -1,11 +1,11 @@
 package com.girhub.SkaYXVIII.ShopOnline.model.projection;
 
-import com.girhub.SkaYXVIII.ShopOnline.model.StoreGroup;
+import com.girhub.SkaYXVIII.ShopOnline.model.ItemsGroup;
 
 public class ItemGroupsReadModel {
     private String description;
 
-    public ItemGroupsReadModel(StoreGroup source) {
+    public ItemGroupsReadModel(ItemsGroup source) {
         this.description = source.getDescription();
     }
 

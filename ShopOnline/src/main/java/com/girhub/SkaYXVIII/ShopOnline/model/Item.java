@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "items")
-public class Store {
+public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -19,20 +19,20 @@ public class Store {
 
     @ManyToOne
     @JoinColumn(name = "store_group_id")
-    private StoreGroup group;
+    private ItemsGroup group;
 
 
-    public Store() {
+    public Item() {
     }
 
-    public Store(int id, String name, float price, String description) {
+    public Item(int id, String name, float price, String description) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
     }
 
-    public Store(int id, String name, float price, String description, StoreGroup group) {
+    public Item(int id, String name, float price, String description, ItemsGroup group) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -43,11 +43,11 @@ public class Store {
 
     }
 
-    public void updateFrom(final Store source){
-        this.name = source.name;
-        this.price = source.price;
-        this.description = source.description;
-        this.group = source.group;
+    public void updateFrom(final Item source){
+        if (source.name != null) this.name = source.name;
+        if (source.price != 0) this.price = source.price;
+        if (source.description != null) this.description = source.description;
+        if (source.group != null) this.group = source.group;
     }
 
 
@@ -83,11 +83,11 @@ public class Store {
         return id;
     }
 
-    public StoreGroup getGroup() {
+    public ItemsGroup getGroup() {
         return group;
     }
 
-    public void setGroup(StoreGroup group) {
+    public void setGroup(ItemsGroup group) {
         this.group = group;
     }
 }
