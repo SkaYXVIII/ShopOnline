@@ -6,6 +6,7 @@ import com.girhub.SkaYXVIII.ShopOnline.model.ItemRepository;
 import com.girhub.SkaYXVIII.ShopOnline.model.projection.ItemReadModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,10 +28,18 @@ public class ItemController {
         this.repository = repository;
         this.service = service;
     }
-    //TODO fix adding and updating items, by connecting them to proper group
+
     @PostMapping
-    ResponseEntity<Item> createItem(@RequestBody @Valid Item toCreate){
+    ResponseEntity<Item> createItemWithoutGroup(@RequestBody @Valid Item toCreate){
         Item result = repository.save(toCreate);
+        return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
+    }
+
+    @PostMapping("/{group_id}")
+    ResponseEntity<Item> createItem(@RequestBody @Valid Item toCreate,@PathVariable int group_id){
+        Item item = service.connectToGroup(toCreate,group_id);
+        if (item == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        Item result = repository.save(item);
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
     }
 
