@@ -1,47 +1,34 @@
 package com.girhub.SkaYXVIII.ShopOnline.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "items")
 public class Item {
     @Id
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank(message = "Item always should have name!")
+//    @NotBlank(message = "Item always should have name!")
     private String name;
 
+//    @NotBlank(message = "Item always should have price!")
+    @Min(0)
     private float price;
 
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "store_group_id")
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "category", referencedColumnName = "id",nullable = false)
     private ItemsGroup group;
 
 
     public Item() {
     }
 
-    public Item(int id, String name, float price, String description) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.description = description;
-    }
-
-    public Item(int id, String name, float price, String description, ItemsGroup group) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.description = description;
-        if (group != null){
-            this.group = group;
-        }
-
-    }
 
     public void updateFrom(final Item source){
         if (source.name != null) this.name = source.name;
