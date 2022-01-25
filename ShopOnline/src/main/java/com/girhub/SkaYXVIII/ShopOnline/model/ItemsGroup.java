@@ -5,14 +5,21 @@ import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Entity
-@Table(name = "store_groups")
+@Table(name = "category")
 public class ItemsGroup {
     @Id
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "title", nullable = false)
     @NotBlank(message = "Task group's description must not be empty")
     private String description;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
+
+    @Column(name = "parent", nullable = false)
+    private int parent;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group", fetch = FetchType.EAGER)
     private Set<Item> items;
 
     public ItemsGroup() {
@@ -40,5 +47,13 @@ public class ItemsGroup {
 
     public void setItems(Set<Item> items) {
         this.items = items;
+    }
+
+    public int getParent() {
+        return parent;
+    }
+
+    public void setParent(int parent) {
+        this.parent = parent;
     }
 }

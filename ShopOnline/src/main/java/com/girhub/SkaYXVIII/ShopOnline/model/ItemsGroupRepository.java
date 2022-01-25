@@ -11,6 +11,4 @@ import java.util.Optional;
 public interface ItemsGroupRepository extends JpaRepository<ItemsGroup,Integer>{
     @Override
     List<ItemsGroup> findAll();
-    Optional<ItemsGroup> findById(Integer id);
-
 }
