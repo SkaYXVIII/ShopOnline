@@ -7,7 +7,10 @@ import com.girhub.SkaYXVIII.ShopOnline.model.projection.ItemReadModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,12 +28,12 @@ public class ItemsGroupController {
     }
 
     @GetMapping
-    ResponseEntity<List<GroupReadModel>> readAllGroups(){
+    ResponseEntity<List<GroupReadModel>> readAllGroups() {
         return ResponseEntity.ok(service.readAll());
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<List<ItemReadModel>> readAllItemsFromGroup(@PathVariable int id){
+    ResponseEntity<List<ItemReadModel>> readAllItemsFromGroup(@PathVariable int id) {
         if (repository.findAllByGroup_Id(id).isEmpty()) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(repository.findAllByGroup_Id(id).stream()
                 .map(ItemReadModel::new)

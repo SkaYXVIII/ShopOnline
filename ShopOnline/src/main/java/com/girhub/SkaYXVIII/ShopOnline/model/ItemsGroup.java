@@ -18,7 +18,7 @@ public class ItemsGroup {
 
     @Column(name = "parent", nullable = false)
     private int parent;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "group", fetch = FetchType.EAGER)
     private Set<Item> items;
 
@@ -29,7 +29,7 @@ public class ItemsGroup {
         return id;
     }
 
-    public void setId(int id) {
+    protected void setId(int id) {
         this.id = id;
     }
 

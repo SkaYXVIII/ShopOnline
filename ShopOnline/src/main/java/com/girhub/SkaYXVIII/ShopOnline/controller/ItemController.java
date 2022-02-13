@@ -7,14 +7,11 @@ import com.girhub.SkaYXVIII.ShopOnline.model.ItemRepository;
 import com.girhub.SkaYXVIII.ShopOnline.model.projection.ItemReadModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
 
 
@@ -32,8 +29,8 @@ public class ItemController {
     }
 
     @PostMapping()
-    public ItemReadModel createItem(@RequestBody @Valid ItemForm form){
-        return new ItemReadModel(service.registerItem(form));
+    public ItemReadModel createItem(@RequestBody @Valid ItemForm form) {
+        return new ItemReadModel(repository.save(service.registerItem(form)));
     }
 
     @GetMapping
@@ -42,12 +39,18 @@ public class ItemController {
         return ResponseEntity.ok(service.readAll());
     }
 
+    @GetMapping("/sorted")
+    ResponseEntity<List<ItemReadModel>> showItemByPrice(@RequestParam float price) {
+        if (service.readByPrice(price).isEmpty()) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(service.readByPrice(price));
+    }
+
+
     @GetMapping("/{id}")
     ResponseEntity<List<ItemReadModel>> readItems(@PathVariable int id) {
         if (service.readById(id).isEmpty()) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(service.readById(id));
     }
-
 
 
     @PutMapping("/{id}")
@@ -64,8 +67,7 @@ public class ItemController {
     }
 
     @DeleteMapping(value = "{id}")
-    public ResponseEntity<Item> deleteItem(@PathVariable("id")Integer id) {
-        Item items = repository.getById(id);
+    public ResponseEntity<Item> deleteItem(@PathVariable("id") Integer id) {
         repository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

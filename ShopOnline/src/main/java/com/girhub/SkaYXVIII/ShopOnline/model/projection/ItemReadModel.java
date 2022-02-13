@@ -2,7 +2,7 @@ package com.girhub.SkaYXVIII.ShopOnline.model.projection;
 
 import com.girhub.SkaYXVIII.ShopOnline.model.Item;
 
-public class ItemReadModel {
+public class ItemReadModel implements Comparable<ItemReadModel> {
     private int id;
 
     private String name;
@@ -13,13 +13,13 @@ public class ItemReadModel {
 
     private ItemGroupsReadModel group;
 
-    public ItemReadModel(Item source){
+    public ItemReadModel(Item source) {
         this.id = source.getId();
         this.name = source.getName();
         this.price = source.getPrice();
         this.description = source.getDescription();
-        if (source.getGroup() != null){
-            this.group =  new ItemGroupsReadModel(source.getGroup());
+        if (source.getGroup() != null) {
+            this.group = new ItemGroupsReadModel(source.getGroup());
         }
     }
 
@@ -61,5 +61,12 @@ public class ItemReadModel {
 
     public void setGroup(ItemGroupsReadModel group) {
         this.group = group;
+    }
+
+    @Override
+    public int compareTo(ItemReadModel o) {
+        int result = Float.compare(getPrice(), o.getPrice());
+        if (result == 0) result = getName().compareTo(o.getName());
+        return result;
     }
 }

@@ -1,10 +1,17 @@
 package com.girhub.SkaYXVIII.ShopOnline.model;
 
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class ItemForm {
 
+    @NotBlank(message = "Item always should have name!")
     private String name;
 
+    @NotNull
+    @Min(0)
     private float price;
 
     private String description;
