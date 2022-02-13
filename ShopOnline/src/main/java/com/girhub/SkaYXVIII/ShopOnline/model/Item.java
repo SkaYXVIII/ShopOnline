@@ -3,6 +3,7 @@ package com.girhub.SkaYXVIII.ShopOnline.model;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "items")
@@ -12,17 +13,17 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-//    @NotBlank(message = "Item always should have name!")
+    @NotBlank(message = "Item always should have name!")
     private String name;
 
-//    @NotBlank(message = "Item always should have price!")
+    @NotNull
     @Min(0)
     private float price;
 
     private String description;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "category", referencedColumnName = "id",nullable = false)
+    @JoinColumn(name = "category", referencedColumnName = "id", nullable = false)
     private ItemsGroup group;
 
 
@@ -30,7 +31,7 @@ public class Item {
     }
 
 
-    public void updateFrom(final Item source){
+    public void updateFrom(final Item source) {
         if (source.name != null) this.name = source.name;
         if (source.price != 0) this.price = source.price;
         if (source.description != null) this.description = source.description;

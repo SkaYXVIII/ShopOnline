@@ -28,6 +28,6 @@ public class SearchController {
     ResponseEntity<List<Item>> readStoreByName(@PathVariable String name) {
         List<Item> items = repository.findByName(name);
         if (items.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(items,HttpStatus.OK);
+        return new ResponseEntity<>(items, HttpStatus.OK);
     }
 }
