@@ -47,7 +47,7 @@ public class ItemController {
 
 
     @GetMapping("/{id}")
-    ResponseEntity<List<ItemReadModel>> readItems(@PathVariable int id) {
+    ResponseEntity<List<ItemReadModel>> readItemById(@PathVariable int id) {
         if (service.readById(id).isEmpty()) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(service.readById(id));
     }

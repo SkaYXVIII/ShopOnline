@@ -22,14 +22,20 @@ public class Item {
 
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "category", referencedColumnName = "id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category", referencedColumnName = "id")
     private ItemsGroup group;
 
 
     public Item() {
     }
 
+    public Item(String name, float price, String description, ItemsGroup group) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.group = group;
+    }
 
     public void updateFrom(final Item source) {
         if (source.name != null) this.name = source.name;
