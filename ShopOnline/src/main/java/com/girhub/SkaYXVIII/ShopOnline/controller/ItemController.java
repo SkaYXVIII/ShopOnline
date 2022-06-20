@@ -19,18 +19,16 @@ import java.util.List;
 @RequestMapping("/items")
 public class ItemController {
     private static final Logger logger = LoggerFactory.getLogger(ItemController.class);
-    private final ItemRepository repository;
     private final ItemService service;
 
 
-    public ItemController(ItemRepository repository, ItemService service) {
-        this.repository = repository;
+    public ItemController(ItemService service) {
         this.service = service;
     }
 
     @PostMapping()
     public ItemReadModel createItem(@RequestBody @Valid ItemForm form) {
-        return new ItemReadModel(repository.save(service.registerItem(form)));
+        return new ItemReadModel(service.registerItem(form));
     }
 
     @GetMapping
@@ -55,20 +53,12 @@ public class ItemController {
 
     @PutMapping("/{id}")
     ResponseEntity<?> updateItems(@PathVariable int id, @RequestBody @Valid Item toUpdate) {
-        if (!repository.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-        repository.findById(id)
-                .ifPresent(item -> {
-                    item.updateFrom(toUpdate);
-                    repository.save(item);
-                });
-        return ResponseEntity.noContent().build();
+       return service.updateItems(id, toUpdate);
     }
 
     @DeleteMapping(value = "{id}")
     public ResponseEntity<Item> deleteItem(@PathVariable("id") Integer id) {
-        repository.deleteById(id);
+        service.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

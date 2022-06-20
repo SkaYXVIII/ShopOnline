@@ -5,8 +5,11 @@ import com.girhub.SkaYXVIII.ShopOnline.model.ItemForm;
 import com.girhub.SkaYXVIII.ShopOnline.model.ItemRepository;
 import com.girhub.SkaYXVIII.ShopOnline.model.ItemsGroupRepository;
 import com.girhub.SkaYXVIII.ShopOnline.model.projection.ItemReadModel;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -48,6 +51,22 @@ public class ItemService {
         item.setDescription(form.getDescription());
         item.setPrice(form.getPrice());
         item.setGroup(groupRepository.findById(form.getGroup()).orElse(null));
-        return item;
+        return repository.save(item);
+    }
+
+    public ResponseEntity<?> updateItems(int id, Item toUpdate){
+        if (!repository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        repository.findById(id)
+                .ifPresent(item -> {
+                    item.updateFrom(toUpdate);
+                    repository.save(item);
+                });
+        return ResponseEntity.noContent().build();
+    }
+
+    public void deleteById(Integer id) {
+        repository.deleteById(id);
     }
 }
