@@ -1,23 +1,23 @@
 # ShopOnline
-My first application using spring boot. It's simple app for training purpose. I'm still working at this project, so its not final version yet :)
-So far I only implemented backend logic of app,that relies on showing items from database,
+My first CRUD application using spring boot. It's simple app for training purpose.
+So far implemented backend logic of app,that relies on showing items from database,
 updating their specification, deleting them, adding them to database and also connecting them in groups.
-I read endpoints through Postman app. My entire website is created on http://localhost:8080.
+I read endpoints through Postman app.
 
-List of Endpoints:
-[GET]
-/items
-/items/{id}
-/groups
-/groups/{id}
-[POST]
-/items
-[PUT]
-/items/{id}
-[DELETE]
-/items/{id}
+## List of Endpoints:
+### [GET]
+- /items
+- /items/{id}
+- /groups
+- /groups/{id}
+### [POST]
+- /items
+### [PUT]
+- /items/{id}
+### [DELETE]
+- /items/{id}
 
-Examples of reading some endpoints type GET:
+## Examples of reading some endpoints type GET:
 
 ![image](https://user-images.githubusercontent.com/72752940/148656524-c8fe77d8-c29f-4920-8f6e-52f5d35a1ea7.png)
 
